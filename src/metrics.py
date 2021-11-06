@@ -69,7 +69,7 @@ def collect_frequency_index(num_days):
                 end_date = date(year=commit_end_date.year, month=commit_end_date.month, day=commit_end_date.day)
 
                 start_range = start_date
-                end_range = start_date.timedelta(days=num_days)
+                end_range = start_date + timedelta(days=num_days)
                 commits_per_interval = []
  
                 while(start_range <= end_date):
@@ -78,8 +78,8 @@ def collect_frequency_index(num_days):
                         num_commits += 1
 
                     commits_per_interval.append(num_commits)
-                    start_range = end_range.timedelta(days=1)
-                    end_range = start_range.timedelta(days=num_days)
+                    start_range = end_range + timedelta(days=1)
+                    end_range = start_range + timedelta(days=num_days)
                 
                 avg_commits_per_range = sum(commits_per_interval)/len(commits_per_interval)
                 df[df['corrected_pj_github_url'] == link, 'frequency'] = avg_commits_per_range
@@ -89,6 +89,78 @@ def collect_frequency_index(num_days):
     except Exception as e:
         print('error collect_frequency_index = {}'.format(e))
 
+
+# frequency of commits 
+def collect_frequency_and_dimensionality_index(num_days):
+    try:
+        repos = get_downloaded_repos()
+        links = get_download_links()
+
+        df = pd.read_csv('csvs/asfi_refined.csv')
+        df['frequency'] = NaN
+        df['dimensionality'] = NaN
+
+        for link in links:
+            if os.path.basename(link) in repos:
+
+                try:
+                    repo = os.path.basename(link)
+                    print(repo)
+                
+                    for commit in Repository('local_repos/{}'.format(repo)).traverse_commits():
+                        commit_start_date = commit.committer_date
+                        break
+                    for commit in Repository('local_repos/{}'.format(repo), order='reverse').traverse_commits():
+                        commit_end_date = commit.committer_date
+                        break
+
+                    start_date = datetime(year=commit_start_date.year, month=commit_start_date.month, day=commit_start_date.day)
+                    end_date = datetime(year=commit_end_date.year, month=commit_end_date.month, day=commit_end_date.day, hour=23, minute=59, second=59)
+
+                    start_range = start_date
+                    end_range = start_range + timedelta(days=num_days, hours=23, minutes=59, seconds=59)
+                    commits_per_interval = []
+                    total_commits = 0
+                    dimensionality = 0 
+
+                    # print(end_date)
+    
+                    while(start_range <= end_date):
+                        num_commits = 0
+                        # print(start_range, end_range)
+                        for commit in Repository('local_repos/{}'.format(repo), since=start_range, to=end_range).traverse_commits():
+                            num_commits += 1
+
+                            if commit.files:
+                                dimensionality += (commit.lines/commit.files)
+
+                        total_commits += num_commits
+                        commits_per_interval.append(num_commits)
+                        start_range = datetime(year=end_range.year, month=end_range.month, day=end_range.day) + timedelta(days=1)
+                        end_range = start_range + timedelta(days=num_days, hours=23, minutes=59, seconds=59)
+                    
+                    # print(commits_per_interval)
+                    # print(sum(commits_per_interval), len(commits_per_interval))
+
+                    if(len(commits_per_interval) != 0):
+                        avg_commits_per_range = sum(commits_per_interval)/len(commits_per_interval)
+                        print('avg_commits_per_range', avg_commits_per_range)
+                        df.loc[df['corrected_pj_github_url'] == link, 'frequency'] = avg_commits_per_range
+
+                    if total_commits:
+                        print('dimensionality', dimensionality/total_commits, total_commits, dimensionality)
+                        df.loc[df['corrected_pj_github_url'] == link, 'dimensionality'] = dimensionality/total_commits
+                
+                    df.to_csv('csvs/asfi_refined.csv', index=False)
+
+                except Exception as e:
+                    print('error collect_frequency_index failed for {}  with error= {}'.format(link, e))
+
+    except Exception as e:
+        print('error collect_frequency_index = {}'.format(e))
+
 # collect_frequency_index(14)
 
-collect_dimensionality_metric()
+# collect_dimensionality_metric()
+
+collect_frequency_and_dimensionality_index(14)
