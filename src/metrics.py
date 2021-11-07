@@ -91,14 +91,19 @@ def collect_frequency_index(num_days):
 
 
 # frequency of commits 
-def collect_frequency_and_dimensionality_index(num_days):
+def collect_frequency_and_dimensionality_index(num_days, read_single=True):
     try:
         repos = get_downloaded_repos()
         links = get_download_links()
 
+        if read_single:
+            links = ['https://github.com/apache/logging-log4cxx']
+
         df = pd.read_csv('csvs/asfi_refined.csv')
-        df['frequency'] = NaN
-        df['dimensionality'] = NaN
+
+        if not read_single:
+            df['frequency'] = NaN
+            df['dimensionality'] = NaN
 
         for link in links:
             if os.path.basename(link) in repos:

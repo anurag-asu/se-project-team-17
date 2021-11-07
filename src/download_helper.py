@@ -49,6 +49,6 @@ def failed_links_count():
     print(len(FAILED_URLS_SET_1))
 
 def download_single():
-    download_repo_through_pydriller('local_repos', 'https://github.com/apache/climate')
+    download_repo_through_pydriller('local_repos', 'https://github.com/apache/logging-log4cxx')
 
-# failed_links_count()
+# download_single()

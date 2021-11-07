@@ -60,5 +60,5 @@ def main():
 
     print(failed_links)
 
-main() 
+# main() 
 
