@@ -11,7 +11,7 @@ from constants import FAILED_URLS_SET_1
 logger = logging.getLogger(__name__)
 
 def get_download_links():
-    df = pd.read_csv('csvs/asfi_refined.csv')
+    df = pd.read_csv('csvs/asfi_refined_with_metrics.csv')
     return list(df['corrected_pj_github_url'])
 
 def get_download_dir():
