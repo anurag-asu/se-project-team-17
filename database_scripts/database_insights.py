@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 
 def find_dead_github_links(database_csv: Path) -> pd.DataFrame:
-    """finds all the un responsive github links"""
+    """finds all the unresponsive github links"""
 
     # the utf-8 encoding was givving some error
     database_df = pd.read_csv(database_csv, encoding="latin-1")
