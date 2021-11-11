@@ -1,33 +1,61 @@
 from pydriller import Repository
-import json
-import requests
+import pandas as pd
+from github import Github
 
-# def get_contributors():
-#     collaborators_url = "https://api.github.com/repos/leeoniya/uPlot/collaborators?affiliation=outside" 
-#     response = requests.get(collaborators_url)
+# Generate a token at https://github.com/settings/tokens
+# token = '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'
 
-#     json_object= json.dump(response.json(), indent=4)
+# g = Github(token)
 
-#     with open('collaborators.json','w') as outfile:
-#         outfile.write
+# repo_name = 'spring-projects/spring-framework'
+# repo = g.get_repo(repo_name)
+# collaborators = repo.get_collaborators()
+
+# for collaborator in collaborators:
+#     print (collaborator.login)
 
 
+def get_repos():
+	df = pd.read_csv("./asfi_refined_false_removed.csv") 
+	project_list = []
+	project_list = df.corrected_pj_github_url
+	print("No. of projects:", len(project_list))
+	return project_list
 
-url = "https://github.com/spring-projects/spring-framework"
-local_path = "./spring-framework"
-repo = Repository(local_path)
-commits = repo.traverse_commits()
-first_commit = next(commits)
-count = 0
+def Additive_contributing_index():
+    df = pd.read_csv("./asfi_refined_false_removed.csv")  
+    # df['additive_contribution_index'] = "NaN"
+    repos = get_repos()
+    count = 0
+    for repo in repos:
+        try:
+            # calculated = float(df.loc[df['corrected_pj_github_url'] == repo, 'additive_contribution_index'])
+            # if calculated > 0.0:
+            #     continue
+            
+            r = Repository(repo)
+            commits = r.traverse_commits()
+            additive_contribution = 0
+            for commit in commits:
+                count+=1
+                added = 0
+                for m in commit.modified_files:
+                    if (m.change_type.name == "ADD"):
+                        added += 1
 
-for commit in commits:
-    count+=1
-    added = 0
-    for m in commit.modified_files:
-        if (m.change_type.name == "ADD"):
-            added += 1
+                files_changed = commit.files
+                if(files_changed):
+                    additive_contribution += added/files_changed
+                    # print(added/files_changed)
 
-    files_changed = commit.files
-    if(files_changed):
-        additive_contribution = added/files_changed
-        print(additive_contribution)
+            additive_contribution_index = additive_contribution / count
+            count = 0
+            df.loc[df['corrected_pj_github_url'] == repo, 'additive_contribution_index'] = additive_contribution_index
+            print(repo,additive_contribution_index)
+            df.to_csv("./asfi_refined_false_removed.csv", index=False)
+        except Exception as e: 
+            print("Repo Failed:", repo)
+            print('{}'.format(e))
+            pass
+
+Additive_contributing_index()
