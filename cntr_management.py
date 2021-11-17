@@ -78,7 +78,7 @@ def get_response(url, page) -> requests.Response:
         time.sleep(rem_time)
         print(
             Fore.LIGHTBLACK_EX
-            + "WE ARE SLEEPING BITCH!"
+            + "WE ARE SLEEPING!"
             + Fore.LIGHTCYAN_EX
             + "for "
             + str(rem_time)
