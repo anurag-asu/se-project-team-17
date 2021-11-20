@@ -1,0 +1,6 @@
+Unnamed: 0,pj_alias,status,pj_github_url,corrected_pj_github_url,pj_github_api_url,correct_url_found,has_hard_fork
+0,amaterasu,0,https://github.com/apache/incubator-Amaterasu,https://github.com/apache/incubator-Amaterasu,https://api.github.com/repos/apache/incubator-retired-amaterasu,TRUE,FALSE
+1,annotator,0,https://github.com/apache/incubator-Annotator,https://github.com/apache/incubator-Annotator,https://api.github.com/repos/apache/incubator-Annotator,TRUE,FALSE
+2,batchee,0,https://github.com/apache/incubator-BatchEE,https://github.com/apache/incubator-BatchEE,https://api.github.com/repos/apache/incubator-BatchEE,TRUE,FALSE
+3,brpc,0,https://github.com/apache/incubator-BRPC,https://github.com/apache/incubator-BRPC,https://api.github.com/repos/apache/incubator-BRPC,TRUE,FALSE
+4,crail,0,https://github.com/apache/incubator-Crail,https://github.com/apache/incubator-Crail,https://api.github.com/repos/apache/incubator-Crail,TRUE,FALSE
