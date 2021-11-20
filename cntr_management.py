@@ -1,6 +1,7 @@
 """centralized management index"""
 
 # %%
+from collections import UserList
 from typing import List
 import pandas as pd
 import requests
@@ -42,7 +43,7 @@ def get_project_list(path) -> List:
 
 def match_regex(s: str) -> bool:
     """check if the regex exists in the str"""
-    regex = "^#[0-9]+"
+    regex = " #[0-9]*" # its seen that a reference can be made to an issue which is hosted at places other than github
     try:
         match = re.search(regex, s)
         return match
@@ -134,16 +135,24 @@ def run_cntrl_mng_idx_for_all(path):
     for index, row in tqdm(df.iterrows()):
         print(Fore.LIGHTBLUE_EX + f"Processing {row['pj_alias']}")
         if not row["correct_url_found"]:
-            cntrl_mng_idx_list.append(None)
-            print(Fore.RED + f"Skipped {row['pj_alias']}")
-            continue
+            # cntrl_mng_idx_list.append(None)
+            print(Fore.RED + f"Running metric on mirrored url {row['pj_alias']}")
+            
 
-        cntrl_idx = get_cntrl_mng_idx_frm_url(row["corrected_pj_github_url"])
+        try:
+
+            cntrl_idx = get_cntrl_mng_idx_frm_url(row["corrected_pj_github_url"])
+        except Exception as e:
+            print(e)
+            print(row["corrected_pj_github_url"])
+            with open("output2.pickle", "wb") as f:
+                pickle.dump(cntrl_mng_idx_list, f)
+
         cntrl_mng_idx_list.append(cntrl_idx)
 
         print(Fore.LIGHTGREEN_EX + f"Done {row['pj_alias']}")
 
-    with open("output.pickle", "wb") as f:
+    with open("output2.pickle", "wb") as f:
         pickle.dump(cntrl_mng_idx_list, f)
 
     print("################### DONE ##################")
