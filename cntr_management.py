@@ -145,6 +145,8 @@ def run_cntrl_mng_idx_for_all(path):
         except Exception as e:
             print(e)
             print(row["corrected_pj_github_url"])
+            # cntrl_mng_idx_list.append(None)
+            cntrl_idx = None
             with open("output2.pickle", "wb") as f:
                 pickle.dump(cntrl_mng_idx_list, f)
 
