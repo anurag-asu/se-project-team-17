@@ -17,8 +17,9 @@ headers = {
 ##optimization
 
 def get_repos():
-	df = pd.read_csv("csv/asfi_refined_false_removed.csv") 
+	df = pd.read_csv("csv/asfi_refined_false_removed.csv")
 	project_list = []
+	#project_list = ["https://api.github.com/repos/apache/incubator-Gobblin"]
 	project_list = df.pj_github_api_url
 	print("No. of projects:", len(project_list))
 	return project_list
@@ -47,12 +48,12 @@ def get_forks(project):
 		for resp in resp_json: 
 			forks_url.append(resp['url'])
 		
-	#print("Total No. of forks:", len(forks_url))
+	print("Total No. of Forks:", len(forks_url))
 	return forks_url
 
 def get_pulls(url):
 	page_num = 1
-	path = url+"/pulls?page={}&per_page=100".format(page_num)
+	path = url+"/pulls?page={}&per_page=100&state=closed".format(page_num)
 
 	resp = requests.get(path, headers=headers)
 	resp.raise_for_status()
@@ -65,7 +66,7 @@ def get_pulls(url):
 		
 	while(len(resp_json) == 100):
 		page_num = page_num + 1
-		path = url+"/pulls?page={}&per_page=100".format(page_num)
+		path = url+"/pulls?page={}&per_page=100&state=closed".format(page_num)
 		
 		resp = requests.get(path, headers=headers)
 		resp.raise_for_status()
@@ -80,18 +81,19 @@ def get_pulls(url):
 def get_merge_status(pull_url):
 	response = requests.get(pull_url+"/merge", headers=headers)
 	merge_status = response.status_code
-	#print(merge_status)
+	print(merge_status)
 	return merge_status
 
 ## Metric 1 - Presence of hard forks
 def check_for_hard_forks():
 	df = pd.read_csv("csv/asfi_refined_false_removed.csv")
 	df['has_hard_fork'] = NaN
+	df['total_hard_forks'] = NaN
 	df['total_forks'] = NaN
 
 	repos = get_repos()
 	for repo in repos:
-		merged_pr = 0
+		total_hard_forks = 0
 		try:
 			forks = get_forks(repo)
 			total_forks = len(forks)
@@ -100,15 +102,18 @@ def check_for_hard_forks():
 			if total_forks == 0:
 				is_hard_fork = False
 				df.loc[df['pj_github_api_url'] == repo, 'has_hard_fork'] = is_hard_fork
+				df.loc[df['pj_github_api_url'] == repo, 'total_hard_forks'] = total_hard_forks
 				continue
 			
 			for fork in forks:
+				merged_pr = 0
 				try:
 					pulls_data = get_pulls(fork)
 					total_prs = len(pulls_data)
 					if (total_prs == 0):
 						is_hard_fork = False
 						df.loc[df['pj_github_api_url'] == repo, 'has_hard_fork'] = is_hard_fork
+						df.loc[df['pj_github_api_url'] == repo, 'total_hard_forks'] = total_hard_forks
 						continue
 					for pull_request in pulls_data:
 						merge_status = get_merge_status(pull_request)
@@ -119,7 +124,11 @@ def check_for_hard_forks():
 					print(merged_pr)
 					if merged_pr >= 2:
 						is_hard_fork = True
+						total_hard_forks += 1
 						df.loc[df['pj_github_api_url'] == repo, 'has_hard_fork'] = is_hard_fork
+						df.loc[df['pj_github_api_url'] == repo, 'total_hard_forks'] = total_hard_forks
+						print(fork, is_hard_fork)
+						df.to_csv("csv/asfi_refined_false_removed.csv", index=False)
 				
 				except Exception as e: 
 					print("Fork Failed:", fork)
@@ -136,24 +145,17 @@ def check_for_hard_forks():
 
 def get_comments(pull_url):
 	page_num = 1
-	response = requests.get(pull_url+"/comments?page={}&per_page=100".format(page_num), headers=headers).json()
+	response = requests.get(pull_url+"/comments", headers=headers).json()
 	resp_json = response
 	comments_list = []
 	
 	for resp in resp_json: 
 		comments_list.append(resp["body"])
-
-	while(len(resp_json) == 100):
-		page_num = page_num + 1
-		response = requests.get(pull_url+"/comments?page={}&per_page=100".format(page_num), headers=headers).json()
-		for resp in response: 
-			comments_list.append(resp["body"])
-		resp_json = response
 	return comments_list
 
 def pattern_matching(comment):
 	
-	pattern = r"(clos(e|ed|ing)|dup(licate(d)?|e)?|super(c|s)ee?ded?|obsoleted?|replaced|redundant|better(implementation|solution)|already(solved|addressed)|(solved|addressed)already)|fixed|done|already"
+	pattern = r"(clos(e|ed|ing)|dup(licate(d)?|e)?|super(c|s)ee?ded?|obsoleted?|replaced|redundant|better(implementation|solution)|already(solved|addressed)|(solved|addressed)already)|fixed already"
 	result = re.match(pattern, comment)
 	duplicate_pr = 0
 
@@ -173,10 +175,12 @@ def ratio_of_duplicate_prs():
 
 	repos = get_repos()
 	for repo in repos:
+		print(repo)
 		duplicate_prs = 0
 		try:
 			pulls_data = get_pulls(repo)
 			total_prs = len(pulls_data)
+			print("Total PRs: ", total_prs)
 			if total_prs == 0:
 				ratio = 0
 				df.loc[df['pj_github_api_url'] == repo, 'ratio_of_duplicate_prs'] = ratio
@@ -186,6 +190,7 @@ def ratio_of_duplicate_prs():
 
 			for pull_request in pulls_data:
 				comments = get_comments(pull_request)
+				#print("No. of comments: ", len(comments))
 				for comment in comments:
 					dup = pattern_matching(comment)
 					duplicate_prs += dup
@@ -211,9 +216,10 @@ def check_rate_limit():
 check_rate_limit()
 #check_for_hard_forks()
 #ratio_of_duplicate_prs()
-#get_forks("https://api.github.com/repos/apache/incubator-DolphinScheduler")
+#get_forks("https://api.github.com/repos/apache/incubator-Gobblin")
 #get_pulls("https://api.github.com/repos/apache/incubator-retired-amaterasu")
 #get_comments("")
+#get_merge_status("https://api.github.com/repos/Diffblue-benchmarks/gobblin/pulls/2")
 
 #Testing
 #get_forks("https://api.github.com/repos/apache/incubator-retired-amaterasu")

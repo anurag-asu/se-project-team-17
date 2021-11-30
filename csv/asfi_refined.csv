@@ -56,7 +56,7 @@
 54,airflow,1,https://github.com/apache/Airflow,https://github.com/apache/Airflow,https://api.github.com/repos/apache/Airflow,TRUE
 55,allura,1,https://github.com/apache/Allura,https://github.com/apache/Allura,https://api.github.com/repos/apache/Allura,TRUE
 56,ambari,1,https://github.com/apache/Ambari,https://github.com/apache/Ambari,https://api.github.com/repos/apache/Ambari,TRUE
-57,oltu,1,https://github.com/apache/Amber,https://github.com/amberframework/amber,https://api.github.com/amberframework/amber,TRUE
+57,oltu,1,https://github.com/apache/Amber,https://github.com/amberframework/amber,https://api.github.com/repos/amberframework/amber,TRUE
 58,any23,1,https://github.com/apache/Any23,https://github.com/apache/Any23,https://api.github.com/repos/apache/Any23,TRUE
 59,apex,1,https://github.com/apache/Apex,https://github.com/apache/apex-core,https://api.github.com/repos/apache/apex-core,TRUE
 60,apollo,1,https://github.com/apache/Apollo,https://github.com/apache/activemq-apollo,https://api.github.com/repos/apache/activemq-apollo,TRUE
@@ -123,9 +123,9 @@
 121,hawq,1,https://github.com/apache/HAWQ,https://github.com/apache/HAWQ,https://api.github.com/repos/apache/HAWQ,TRUE
 122,hcatalog,1,https://github.com/apache/HCatalog,https://github.com/apache/HCatalog,https://api.github.com/repos/apache/HCatalog,TRUE
 123,helix,1,https://github.com/apache/Helix,https://github.com/apache/Helix,https://api.github.com/repos/apache/Helix,TRUE
-124,hermes,1,https://github.com/apache/Hermes,https://github.com/allegro/hermes,https://api.github.com/allegro/hermes,TRUE
+124,hermes,1,https://github.com/apache/Hermes,https://github.com/allegro/hermes,https://api.github.com/repos/allegro/hermes,TRUE
 125,httpd-cli,1,https://github.com/apache/httpd-CLI,https://github.com/apache/httpd,https://api.github.com/repos/apache/httpd,TRUE
-126,ibatis,1,https://github.com/apache/iBATIS,https://github.com/mybatis/mybatis-3,https://api.github.com/mybatis/mybatis-3,TRUE
+126,ibatis,1,https://github.com/apache/iBATIS,https://github.com/mybatis/mybatis-3,https://api.github.com/repos/mybatis/mybatis-3,TRUE
 127,ignite,1,https://github.com/apache/Ignite,https://github.com/apache/Ignite,https://api.github.com/repos/apache/Ignite,TRUE
 128,impala,1,https://github.com/apache/Impala,https://github.com/apache/Impala,https://api.github.com/repos/apache/Impala,TRUE
 129,isis,1,https://github.com/apache/Isis,https://github.com/apache/Isis,https://api.github.com/repos/apache/Isis,TRUE
@@ -161,7 +161,7 @@
 159,metamodel,1,https://github.com/apache/MetaModel,https://github.com/apache/MetaModel,https://api.github.com/repos/apache/MetaModel,TRUE
 160,metron,1,https://github.com/apache/Metron,https://github.com/apache/Metron,https://api.github.com/repos/apache/Metron,TRUE
 161,mnemonic,1,https://github.com/apache/Mnemonic,https://github.com/apache/Mnemonic,https://api.github.com/repos/apache/Mnemonic,TRUE
-162,mod_ftp,1,https://github.com/apache/mod_ftp,https://github.com/OutOfOrder/mod_ftpd,https://api.github.com/OutOfOrder/mod_ftpd,TRUE
+162,mod_ftp,1,https://github.com/apache/mod_ftp,https://github.com/OutOfOrder/mod_ftpd,https://api.github.com/repos/OutOfOrder/mod_ftpd,TRUE
 163,mrunit,1,https://github.com/apache/MRUnit,https://github.com/apache/MRUnit,https://api.github.com/repos/apache/MRUnit,TRUE
 164,muse,1,https://github.com/apache/Muse,https://github.com/apache/Muse,https://api.github.com/repos/apache/Muse,FALSE
 165,myfaces,1,https://github.com/apache/MyFaces,https://github.com/apache/MyFaces,https://api.github.com/repos/apache/MyFaces,TRUE
@@ -251,8 +251,8 @@
 249,woden,1,https://github.com/apache/Woden,https://github.com/wso2/wso2-axis2,https://api.github.com/wso2/wso2-axis2,TRUE
 250,xmlbeans,1,https://github.com/apache/XMLBeans,https://github.com/apache/XMLBeans,https://api.github.com/repos/apache/XMLBeans,TRUE
 251,zeppelin,1,https://github.com/apache/Zeppelin,https://github.com/apache/Zeppelin,https://api.github.com/repos/apache/Zeppelin,TRUE
-252,agila,2,https://github.com/apache/Agila,https://github.com/agilasverige/agilasverige_site,https://api.github.com/agilasverige/agilasverige_site,TRUE
-253,alois,2,https://github.com/apache/Alois,https://github.com/logintas/alois,https://api.github.com/logintas/alois,TRUE
+252,agila,2,https://github.com/apache/Agila,https://github.com/agilasverige/agilasverige_site,https://api.github.com/repos/agilasverige/agilasverige_site,TRUE
+253,alois,2,https://github.com/apache/Alois,https://github.com/logintas/alois,https://api.github.com/repos/logintas/alois,TRUE
 254,altrmi,2,https://github.com/apache/AltRMI,https://github.com/apache/AltRMI,https://api.github.com/repos/apache/AltRMI,FALSE
 255,ariatosca,2,https://github.com/apache/AriaTosca,https://github.com/apache/incubator-ariatosca,https://api.github.com/repos/apache/incubator-ariatosca,TRUE
 256,awf,2,https://github.com/apache/AWF,https://github.com/apache/AWF,https://api.github.com/repos/apache/AWF,FALSE
@@ -265,8 +265,8 @@
 263,corinthia,2,https://github.com/apache/Corinthia,https://github.com/apache/incubator-retired-corinthia,https://api.github.com/repos/apache/incubator-retired-corinthia,TRUE
 264,cotton,2,https://github.com/apache/Cotton,https://github.com/apache/incubator-retired-cotton,https://api.github.com/repos/apache/incubator-retired-cotton,TRUE
 265,depot,2,https://github.com/apache/Depot,https://github.com/apache/Depot,https://api.github.com/repos/apache/Depot,FALSE
-266,droids,2,https://github.com/apache/Droids,https://github.com/trickl/trickl-crawler,https://api.github.com/trickl/trickl-crawler,TRUE
-267,gearpump,2,https://github.com/apache/Gearpump,https://github.com/gearpump/gearpump,https://api.github.com/gearpump/gearpump,TRUE
+266,droids,2,https://github.com/apache/Droids,https://github.com/trickl/trickl-crawler,https://api.github.com/repos/trickl/trickl-crawler,TRUE
+267,gearpump,2,https://github.com/apache/Gearpump,https://github.com/gearpump/gearpump,https://api.github.com/repos/gearpump/gearpump,TRUE
 268,gossip,2,https://github.com/apache/Gossip,https://github.com/apache/incubator-retired-gossip,https://api.github.com/repos/apache/incubator-retired-gossip,TRUE
 269,graffito,2,https://github.com/apache/Graffito,https://github.com/apache/Graffito,https://api.github.com/repos/apache/Graffito,FALSE
 270,hdt,2,https://github.com/apache/incubator-retired-hdt,https://github.com/apache/incubator-retired-hdt,https://api.github.com/repos/apache/incubator-retired-hdt,TRUE
@@ -306,7 +306,7 @@
 304,wadi,2,https://github.com/apache/WADI,https://github.com/apache/WADI,https://api.github.com/repos/apache/WADI,FALSE
 305,wave,2,https://github.com/apache/Wave,https://github.com/apache/incubator-retired-wave,https://api.github.com/repos/apache/incubator-retired-wave,TRUE
 306,wsrp4j,2,https://github.com/apache/WSRP4J,https://github.com/apache/WSRP4J,https://api.github.com/repos/apache/WSRP4J,FALSE
-307,xap,2,https://github.com/apache/XAP,https://github.com/xap/xap,https://api.github.com/xap/xap,TRUE
+307,xap,2,https://github.com/apache/XAP,https://github.com/xap/xap,https://api.github.com/repos/xap/xap,TRUE
 308,xmlbeans-cxx,2,https://github.com/apache/XMLBeans/C++,https://github.com/apache/xmlbeans,https://api.github.com/repos/apache/xmlbeans,TRUE
 309,yoko,2,https://github.com/apache/Yoko,https://github.com/apache/geronimo-yoko,https://api.github.com/repos/apache/geronimo-yoko,TRUE
 310,zeta,2,https://github.com/apache/ZetaComponents,https://github.com/apache/ZetaComponents,https://api.github.com/repos/apache/ZetaComponents,TRUE

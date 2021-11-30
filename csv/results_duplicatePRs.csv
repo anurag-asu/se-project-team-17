@@ -1,0 +1,20 @@
+Unnamed: 0,pj_alias,status,pj_github_url,corrected_pj_github_url,pj_github_api_url,correct_url_found,ratio_of_duplicate_prs,total_prs,duplicate_prs
+0,amaterasu,0,https://github.com/apache/incubator-Amaterasu,https://github.com/apache/incubator-Amaterasu,https://api.github.com/repos/apache/incubator-retired-amaterasu,TRUE,0,58,0
+1,annotator,0,https://github.com/apache/incubator-Annotator,https://github.com/apache/incubator-Annotator,https://api.github.com/repos/apache/incubator-Annotator,TRUE,0,52,0
+2,batchee,0,https://github.com/apache/incubator-BatchEE,https://github.com/apache/incubator-BatchEE,https://api.github.com/repos/apache/incubator-BatchEE,TRUE,0,3,0
+3,brpc,0,https://github.com/apache/incubator-BRPC,https://github.com/apache/incubator-BRPC,https://api.github.com/repos/apache/incubator-BRPC,TRUE,0,403,0
+4,crail,0,https://github.com/apache/incubator-Crail,https://github.com/apache/incubator-Crail,https://api.github.com/repos/apache/incubator-Crail,TRUE,0,85,0
+5,daffodil,0,https://github.com/apache/incubator-Daffodil,https://github.com/apache/incubator-Daffodil,https://api.github.com/repos/apache/incubator-Daffodil,TRUE,0.002945508,679,2
+6,datasketches,0,https://github.com/apache/incubator-DataSketches,https://github.com/apache/incubator-DataSketches,https://api.github.com/repos/apache/incubator-DataSketches,TRUE,0,0,0
+7,dlab,0,https://github.com/apache/incubator-DLab,https://github.com/apache/incubator-DLab,https://api.github.com/repos/apache/incubator-DLab,TRUE,0,1319,0
+8,dolphinscheduler,0,https://github.com/apache/incubator-DolphinScheduler,https://github.com/apache/incubator-DolphinScheduler,https://api.github.com/repos/apache/incubator-DolphinScheduler,TRUE,0.000272926,3664,1
+9,doris,0,https://github.com/apache/incubator-Doris,https://github.com/apache/incubator-Doris,https://api.github.com/repos/apache/incubator-Doris,TRUE,0,4182,0
+,,,,,,,,,
+,,,,,,,,,
+76,chemistry,1,https://github.com/apache/Chemistry,https://github.com/apache/Chemistry,https://api.github.com/repos/apache/Chemistry,TRUE,0,0,0
+77,chukwa,1,https://github.com/apache/Chukwa,https://github.com/apache/Chukwa,https://api.github.com/repos/apache/Chukwa,TRUE,0,7,0
+78,clerezza,1,https://github.com/apache/Clerezza,https://github.com/apache/Clerezza,https://api.github.com/repos/apache/Clerezza,TRUE,0,17,0
+79,click,1,https://github.com/apache/Click,https://github.com/apache/Click,https://api.github.com/repos/apache/Click,TRUE,0,0,0
+80,cloudstack,1,https://github.com/apache/CloudStack,https://github.com/apache/CloudStack,https://api.github.com/repos/apache/CloudStack,TRUE,0.000450653,4438,2
+81,commonsrdf,1,https://github.com/apache/CommonsRDF,https://github.com/apache/commons-rdf,https://api.github.com/repos/apache/commons-rdf,TRUE,0,58,0
+82,cordova,1,https://github.com/apache/Cordova,https://github.com/apache/Cordova,https://api.github.com/repos/apache/Cordova,TRUE,0,17,0
