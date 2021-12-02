@@ -18,12 +18,26 @@ def collect_dimensionality_metric():
         repos = get_downloaded_repos()
         links = get_download_links()
 
-        df = pd.read_csv('csvs/asfi_refined.csv')
-        df['dimensionality'] = NaN
+        df = pd.read_csv('csvs/metrics_combined_copy.csv')
+        # df['dimensionality'] = NaN
 
         for link in links:
+
+            found = df.loc[df['corrected_pj_github_url'] == link, 'correct_url_found'].bool()
+            if not found:
+                df.loc[df['corrected_pj_github_url'] == link, 'dimensionality'] = NaN
+                df.to_csv('csvs/metrics_combined_copy.csv', index=False)
+                continue
+
             if os.path.basename(link) in repos:
+
+                value = float(df.loc[df['corrected_pj_github_url'] == link, 'dimensionality'])
+                if value > 0.0:
+                    continue
+
                 repo = os.path.basename(link)
+
+                print('calculating for link', link)
                 
                 commits_nums = 0
                 dimensionality = 0
@@ -41,9 +55,8 @@ def collect_dimensionality_metric():
                     print(repo, commits_nums, dimensionality)
 
                 df.loc[df['corrected_pj_github_url'] == link, 'dimensionality'] = dimensionality
+                df.to_csv('csvs/metrics_combined_copy.csv')
                 print(repo, dimensionality)
-        
-        df.to_csv('csvs/asfi_refined.csv')
 
     except Exception as e:
         print('error collect_dimensionality_metric = {}'.format(e))
@@ -84,15 +97,29 @@ def collect_frequency_index(num_days):
         links = get_download_links()
         # links = ['https://github.com/apache/incubator-Doris']
 
-        df = pd.read_csv('csvs/asfi_refined_with_metrics.csv')
+        df = pd.read_csv('csvs/metrics_combined_copy.csv')
 
         for link in links:
+
+            found = df.loc[df['corrected_pj_github_url'] == link, 'correct_url_found'].bool()
+            if not found:
+                df.loc[df['corrected_pj_github_url'] == link, 'frequency'] = NaN
+                df.to_csv('csvs/metrics_combined_copy.csv', index=False)
+                continue
+
+            pr_found = df.loc[df['corrected_pj_github_url'] == link, 'prs_found'].bool()
+            if not pr_found:
+                df.loc[df['corrected_pj_github_url'] == link, 'frequency'] = 0
+                df.to_csv('csvs/metrics_combined_copy.csv', index=False)
+                continue
+
             try:
-                print(link)
 
                 freq = float(df.loc[df['corrected_pj_github_url'] == link, 'frequency'])
                 if freq > 0.0:
                     continue
+
+                print(link)
 
                 created_at_list = get_pulls(link)
                 print('created_at_list', len(created_at_list))
