@@ -2,6 +2,7 @@ from numpy import NaN
 import requests
 import pandas as pd
 import re
+import time
 
 #personal token
 token = ""
@@ -93,6 +94,10 @@ def check_for_hard_forks():
 
 	repos = get_repos()
 	for repo in repos:
+		calculated = float(df.loc[df['pj_github_api_url'] == repo, 'total_forks'])
+		if calculated >= 0.0:
+			continue
+		
 		total_hard_forks = 0
 		try:
 			forks = get_forks(repo)
@@ -163,21 +168,25 @@ def pattern_matching(comment):
 		duplicate_pr += 1
 	else:
 		pass
-	#print(duplicate_pr)
+	
 	return duplicate_pr
 
 ## Metric 2 - Ratio of duplicate PRs
 def ratio_of_duplicate_prs():
 	df = pd.read_csv("csv/asfi_refined_false_removed.csv")
-	df['ratio_of_duplicate_prs'] = NaN
-	df['total_prs'] = NaN
-	df['duplicate_prs'] = NaN
+	# df['ratio_of_duplicate_prs'] = NaN
+	# df['total_prs'] = NaN
+	# df['duplicate_prs'] = NaN
 
 	repos = get_repos()
 	for repo in repos:
-		print(repo)
+		calculated = float(df.loc[df['pj_github_api_url'] == repo, 'total_prs'])
+		if calculated >= 0.0:
+			continue
+		
 		duplicate_prs = 0
 		try:
+			print(repo)
 			pulls_data = get_pulls(repo)
 			total_prs = len(pulls_data)
 			print("Total PRs: ", total_prs)
@@ -190,11 +199,11 @@ def ratio_of_duplicate_prs():
 
 			for pull_request in pulls_data:
 				comments = get_comments(pull_request)
-				#print("No. of comments: ", len(comments))
 				for comment in comments:
 					dup = pattern_matching(comment)
 					duplicate_prs += dup
-			
+				# print (duplicate_prs)
+
 			ratio = duplicate_prs / total_prs
 			df.loc[df['pj_github_api_url'] == repo, 'ratio_of_duplicate_prs'] = ratio
 			df.loc[df['pj_github_api_url'] == repo, 'total_prs'] = total_prs
@@ -215,7 +224,7 @@ def check_rate_limit():
 
 check_rate_limit()
 #check_for_hard_forks()
-#ratio_of_duplicate_prs()
+ratio_of_duplicate_prs()
 #get_forks("https://api.github.com/repos/apache/incubator-Gobblin")
 #get_pulls("https://api.github.com/repos/apache/incubator-retired-amaterasu")
 #get_comments("")
