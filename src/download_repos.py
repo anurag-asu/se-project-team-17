@@ -6,14 +6,19 @@ from threading import Thread
 from typing import final
 from constants import FAILED_URLS
 
-from download_helper import get_download_links, get_download_dir, download_repo_through_pydriller, get_downloaded_repos
+from download_helper import (
+    get_download_links,
+    get_download_dir,
+    download_repo_through_pydriller,
+    get_downloaded_repos,
+)
 
 logger = logging.getLogger(__name__)
 
 failed_links = []
 
-class DownloadWorker(Thread):
 
+class DownloadWorker(Thread):
     def __init__(self, queue):
         Thread.__init__(self)
         self.queue = queue
@@ -49,16 +54,16 @@ def main():
     final = []
 
     for link in links:
-        print('Queueing {}'.format(link))
+        print("Queueing {}".format(link))
         if os.path.basename(link) not in repos:
             queue.put((download_dir, link))
             final.append(link)
 
-    print('downloading ', len(final))
+    print("downloading ", len(final))
     # Causes the main thread to wait for the queue to finish processing all the tasks
     queue.join()
 
     print(failed_links)
 
-# main() 
 
+# main()
