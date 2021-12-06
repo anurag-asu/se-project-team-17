@@ -118,13 +118,19 @@ def srch_for_author_in_comments(response_json: dict, author: str):
     resp_json = resp.json()
     while resp_json:
 
-        for comment in tqdm(
+        for i,comment in enumerate(tqdm(
             response_json, desc=f"Iterating over the comments page {page}"
-        ):
+        )):
+            # capping the comments count so that it's feasable to collect this data
+            if i == 100:
+                break
             if comment["user"]["login"] == author:
                 print(Fore.GREEN + "Author's comment found")
                 return 1
         page += 1
+        # capping the page limit so that 150 max items i.e 5*30
+        if page == 5:
+            break
         resp: requests.Response = get_response(frmtd_cmmnts_url, page)
         resp_json = resp.json()
 
@@ -282,6 +288,10 @@ def get_pre_comm_idx_frm_url(url: str):
             prs_w_pre_comm += chk_for_precomm_in_a_pr(pr)
 
             page += 1
+
+            # capping page to 5 so O(n) = 5x30 = 150
+            if page == 5:
+                break
             resp: requests.Response = get_response(url, page)
 
     print(Fore.YELLOW + f"total pr {total_prs}")
