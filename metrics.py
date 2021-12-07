@@ -10,17 +10,9 @@ headers = {
 	"Authorization": "token " + token
 }
 
-##Todo
-##external developers - 
-# check for external contributor
-# i will take any contributor other than apache to be external contributor
-#if resp['user']['login'] != "apache":
-##optimization
-
 def get_repos():
 	df = pd.read_csv("csv/asfi_refined_false_removed.csv")
 	project_list = []
-	#project_list = ["https://api.github.com/repos/apache/incubator-Gobblin"]
 	project_list = df.pj_github_api_url
 	print("No. of projects:", len(project_list))
 	return project_list
@@ -73,6 +65,11 @@ def get_pulls(url):
 		resp.raise_for_status()
 		resp_json = resp.json()
 
+		# Use when pulls are more than 4000
+		# if page_num >= 41:
+		# 	print(page_num)
+		# 	break
+
 		for resp in resp_json:
 			pulls_url.append(resp['url'])
 		
@@ -82,15 +79,15 @@ def get_pulls(url):
 def get_merge_status(pull_url):
 	response = requests.get(pull_url+"/merge", headers=headers)
 	merge_status = response.status_code
-	print(merge_status)
+	# print(merge_status)
 	return merge_status
 
 ## Metric 1 - Presence of hard forks
 def check_for_hard_forks():
 	df = pd.read_csv("csv/asfi_refined_false_removed.csv")
-	df['has_hard_fork'] = NaN
-	df['total_hard_forks'] = NaN
-	df['total_forks'] = NaN
+	# df['has_hard_fork'] = NaN
+	# df['total_hard_forks'] = NaN
+	# df['total_forks'] = NaN
 
 	repos = get_repos()
 	for repo in repos:
@@ -222,20 +219,7 @@ def check_rate_limit():
 	#print(resp)
 	print(resp["rate"])
 
+## Functions to run the metrics
 check_rate_limit()
-#check_for_hard_forks()
+# check_for_hard_forks()
 ratio_of_duplicate_prs()
-#get_forks("https://api.github.com/repos/apache/incubator-Gobblin")
-#get_pulls("https://api.github.com/repos/apache/incubator-retired-amaterasu")
-#get_comments("")
-#get_merge_status("https://api.github.com/repos/Diffblue-benchmarks/gobblin/pulls/2")
-
-#Testing
-#get_forks("https://api.github.com/repos/apache/incubator-retired-amaterasu")
-#get_pulls("https://api.github.com/repos/apache/incubator-BRPC/forks")
-#total_prs = len(get_pulls("https://api.github.com/repos/apache/incubator-retired-amaterasu"))
-#url = "https://api.github.com/repos/xap/xap"
-#for comment in get_comments(url+"/pulls"):
-#	duplicate_prs = pattern_matching(comment)
-#print(len(get_pulls(url)))
-#print(duplicate_prs)
