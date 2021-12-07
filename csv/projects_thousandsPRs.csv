@@ -1,0 +1,17 @@
+	pj_alias	status	pj_github_url	corrected_pj_github_url	pj_github_api_url	correct_url_found	ratio_of_duplicate_prs	total_prs	duplicate_prs
+10	druid	0	https://github.com/apache/incubator-Druid	https://github.com/apache/incubator-Druid	https://api.github.com/repos/apache/incubator-Druid	TRUE	0.0005	7626	
+28	pinot	0	https://github.com/apache/incubator-Pinot	https://github.com/apache/incubator-Pinot	https://api.github.com/repos/apache/incubator-Pinot	TRUE	0.00025	6566	
+35	shardingsphere	0	https://github.com/apache/incubator-ShardingSphere	https://github.com/apache/incubator-ShardingSphere	https://api.github.com/repos/apache/incubator-ShardingSphere	TRUE	0.00075	7969	
+38	superset	0	https://github.com/apache/incubator-Superset	https://github.com/apache/incubator-Superset	https://api.github.com/repos/apache/incubator-Superset	TRUE	0.0005	9577	
+46	tvm	0	https://github.com/apache/incubator-TVM	https://github.com/apache/incubator-TVM	https://api.github.com/repos/apache/incubator-TVM	TRUE	0.00125	7429	
+54	airflow	1	https://github.com/apache/Airflow	https://github.com/apache/Airflow	https://api.github.com/repos/apache/Airflow	TRUE	0	14309	
+65	beam	1	https://github.com/apache/Beam	https://github.com/apache/Beam	https://api.github.com/repos/apache/Beam	TRUE	0.00125	15903	
+107	flink	1	https://github.com/apache/Flink	https://github.com/apache/Flink	https://api.github.com/repos/apache/Flink	TRUE	0.00225	17247	
+112	geode	1	https://github.com/apache/Geode	https://github.com/apache/Geode	https://api.github.com/repos/apache/Geode	TRUE	0.001	7101	
+127	ignite	1	https://github.com/apache/Ignite	https://github.com/apache/Ignite	https://api.github.com/repos/apache/Ignite	TRUE	0.00225	8816	
+141	kafka	1	https://github.com/apache/Kafka	https://github.com/apache/Kafka	https://api.github.com/repos/apache/Kafka	TRUE	0.0055	8816	
+142	knox	1	https://github.com/apache/Knox	https://github.com/apache/Knox	https://api.github.com/repos/apache/Knox	TRUE	0.001980198	10588	
+167	netbeans	1	https://github.com/apache/NetBeans	https://github.com/apache/NetBeans	https://api.github.com/repos/apache/NetBeans	TRUE	0	3257	
+168	nifi	1	https://github.com/apache/NiFi	https://github.com/apache/NiFi	https://api.github.com/repos/apache/NiFi	TRUE	0.00025	5474	
+195	pulsar	1	https://github.com/apache/Pulsar	https://github.com/apache/Pulsar	https://api.github.com/repos/apache/Pulsar	TRUE	0.00025	8669	
+217	spark	1	https://github.com/apache/Spark	https://github.com/apache/Spark	https://api.github.com/repos/apache/Spark	TRUE		34546	
