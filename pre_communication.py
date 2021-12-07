@@ -124,9 +124,12 @@ def srch_for_author_in_comments(response_json: dict, author: str):
             # capping the comments count so that it's feasable to collect this data
             if i == 100:
                 break
-            if comment["user"]["login"] == author:
-                print(Fore.GREEN + "Author's comment found")
-                return 1
+            try:
+                if comment["user"]["login"] == author:
+                    print(Fore.GREEN + "Author's comment found")
+                    return 1
+            except TypeError:
+                continue
         page += 1
         # capping the page limit so that 150 max items i.e 5*30
         if page == 5:
@@ -205,7 +208,13 @@ def chk_if_author_reported_issue(issue_json: dict, author):
 def chk_if_author_assigned_to_issue(issue_json: dict, author: str):
     """checks if author is assigned in the issue"""
 
-    issue_assignee = issue_json["assignee"]["login"]
+    try:
+        issue_assignee = issue_json["assignee"]["login"]
+    except TypeError as e:
+        print(e)
+        # print(f"{issue_json=}")
+
+        issue_assignee = ""
 
     if issue_assignee == author:
         print(Fore.GREEN + "Author assignmed in issue")
@@ -215,8 +224,14 @@ def chk_if_author_assigned_to_issue(issue_json: dict, author: str):
 
 def chk_linked_issues(response_json: dict) -> int:
     """check if issues are linked and then search for presence of author in the issues"""
+
     author = response_json["user"]["login"]
-    repo_url = response_json["head"]["repo"]["full_name"]
+    try:    
+        repo_url = response_json["head"]["repo"]["full_name"]
+    except TypeError:
+        repo_url = response_json["html_url"]
+        repo_url = repo_url.split("/")
+        repo_url = "/".join(repo_url[:-2])
     title = response_json["title"]
     body = response_json["body"]
     issues_title = match_regex(title, regex=" #([0-9]+)") or []
@@ -229,6 +244,11 @@ def chk_linked_issues(response_json: dict) -> int:
 
             issue_resp = get_resp_without_pages(issue_url)
             issue_json = issue_resp.json()
+
+            if 'message' in issue_json:
+                continue
+
+
             author_assigned_in_issue = chk_if_author_assigned_to_issue(
                 issue_json, author
             )
@@ -287,12 +307,12 @@ def get_pre_comm_idx_frm_url(url: str):
         for pr in tqdm(resp_json, desc=f"Iterating over the pr json page {page}"):
             prs_w_pre_comm += chk_for_precomm_in_a_pr(pr)
 
-            page += 1
+        page += 1
 
-            # capping page to 5 so O(n) = 5x30 = 150
-            if page == 5:
-                break
-            resp: requests.Response = get_response(url, page)
+        # capping page to 5 so O(n) = 5x30 = 150
+        if page == 5:
+            break
+        resp: requests.Response = get_response(url, page)
 
     print(Fore.YELLOW + f"total pr {total_prs}")
     print(Fore.YELLOW + f"pr with pre comminication {prs_w_pre_comm}")
