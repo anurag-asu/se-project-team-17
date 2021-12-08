@@ -16,14 +16,15 @@ from github import Github
 
 
 def get_repos():
-	df = pd.read_csv("./asfi_refined_false_removed.csv") 
-	project_list = []
-	project_list = df.corrected_pj_github_url
-	print("No. of projects:", len(project_list))
-	return project_list
+    df = pd.read_csv("./asfi_refined_false_removed.csv")
+    project_list = []
+    project_list = df.corrected_pj_github_url
+    print("No. of projects:", len(project_list))
+    return project_list
+
 
 def Additive_contributing_index():
-    df = pd.read_csv("./asfi_refined_false_removed.csv")  
+    df = pd.read_csv("./asfi_refined_false_removed.csv")
     # df['additive_contribution_index'] = "NaN"
     repos = get_repos()
     count = 0
@@ -32,30 +33,33 @@ def Additive_contributing_index():
             # calculated = float(df.loc[df['corrected_pj_github_url'] == repo, 'additive_contribution_index'])
             # if calculated > 0.0:
             #     continue
-            
+
             r = Repository(repo)
             commits = r.traverse_commits()
             additive_contribution = 0
             for commit in commits:
-                count+=1
+                count += 1
                 added = 0
                 for m in commit.modified_files:
-                    if (m.change_type.name == "ADD"):
+                    if m.change_type.name == "ADD":
                         added += 1
 
                 files_changed = commit.files
-                if(files_changed):
-                    additive_contribution += added/files_changed
+                if files_changed:
+                    additive_contribution += added / files_changed
                     # print(added/files_changed)
 
             additive_contribution_index = additive_contribution / count
             count = 0
-            df.loc[df['corrected_pj_github_url'] == repo, 'additive_contribution_index'] = additive_contribution_index
-            print(repo,additive_contribution_index)
+            df.loc[
+                df["corrected_pj_github_url"] == repo, "additive_contribution_index"
+            ] = additive_contribution_index
+            print(repo, additive_contribution_index)
             df.to_csv("./asfi_refined_false_removed.csv", index=False)
-        except Exception as e: 
+        except Exception as e:
             print("Repo Failed:", repo)
-            print('{}'.format(e))
+            print("{}".format(e))
             pass
+
 
 Additive_contributing_index()

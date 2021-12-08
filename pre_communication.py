@@ -118,9 +118,9 @@ def srch_for_author_in_comments(response_json: dict, author: str):
     resp_json = resp.json()
     while resp_json:
 
-        for i,comment in enumerate(tqdm(
-            response_json, desc=f"Iterating over the comments page {page}"
-        )):
+        for i, comment in enumerate(
+            tqdm(response_json, desc=f"Iterating over the comments page {page}")
+        ):
             # capping the comments count so that it's feasable to collect this data
             if i == 100:
                 break
@@ -226,7 +226,7 @@ def chk_linked_issues(response_json: dict) -> int:
     """check if issues are linked and then search for presence of author in the issues"""
 
     author = response_json["user"]["login"]
-    try:    
+    try:
         repo_url = response_json["head"]["repo"]["full_name"]
     except TypeError:
         repo_url = response_json["html_url"]
@@ -245,9 +245,8 @@ def chk_linked_issues(response_json: dict) -> int:
             issue_resp = get_resp_without_pages(issue_url)
             issue_json = issue_resp.json()
 
-            if 'message' in issue_json:
+            if "message" in issue_json:
                 continue
-
 
             author_assigned_in_issue = chk_if_author_assigned_to_issue(
                 issue_json, author
