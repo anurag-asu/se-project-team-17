@@ -45,4 +45,4 @@ File: [src/metrics.py](src/metrics.py)
 
 File: [src/metrics.py](src/metrics.py)
 
-The results of these metrics calculation can be found here: [results/metrics_combined - asfi_refined_with_metrics.csv](results/metrics_combined - asfi_refined_with_metrics.csv)
+The results of these metrics calculation can be found here: [results/metrics_combined_asfi_refined_with_metrics.csv](results/metrics_combined_asfi_refined_with_metrics.csv)
