@@ -4,7 +4,7 @@ Ongoing project on finding the corelation between efficient forking practices an
 
 We have calculated a set of eight metrics:
 
-**Metric 1:** Logic coupling Index: is used to assess the modularity of the project by analyzing the most recent commits by contributors. We estimate the ratio of file pairs that were changed, i.e. added or modified, together in those commits out of all file pairs in the projects using PyDriller\cite{pydriller}. Next, by computing the mean of recent commits, we aggregate this metric at the project level. We assess the most recent 150 commits for each project in order to remove bias from past but now altered practices. Lower logic coupling indexes suggest higher modularity, as fewer files are altered at the same time.
+**Metric 1:** Logic coupling Index: is used to assess the modularity of the project by analyzing the most recent commits by contributors. We estimate the ratio of file pairs that were changed, i.e. added or modified, together in those commits out of all file pairs in the projects using PyDriller. Next, by computing the mean of recent commits, we aggregate this metric at the project level. We assess the most recent 150 commits for each project in order to remove bias from past but now altered practices. Lower logic coupling indexes suggest higher modularity, as fewer files are altered at the same time.
 
 *File: Logic_coupling_index.py*
 
@@ -16,11 +16,11 @@ We have calculated a set of eight metrics:
 
 *File: metrics_hardforks_duplicatePRs.py*
 
-**Metric 4:** Presence of hard forks: a fork that has at least 2 merged pull requests from external developers \cite{what_the_fork} is identified as a hard fork. For calculating this metric, we use the REST API by GitHub to get a list of forks, and for each fork, we get a list of pull requests. Then, we see the merge status of each pull request in that fork to categorize if there are any merged PRs in a particular fork. If we find 2 or more merged PRs for a fork, we assign a boolean value of TRUE/FALSE for that project categorizing if the project has a hard fork or not.
+**Metric 4:** Presence of hard forks: a fork that has at least 2 merged pull requests from external developers is identified as a hard fork. For calculating this metric, we use the REST API by GitHub to get a list of forks, and for each fork, we get a list of pull requests. Then, we see the merge status of each pull request in that fork to categorize if there are any merged PRs in a particular fork. If we find 2 or more merged PRs for a fork, we assign a boolean value of TRUE/FALSE for that project categorizing if the project has a hard fork or not.
 
 *File: metrics_hardforks_duplicatePRs.py*
 
-**Metric 5:** Centralized management Index: measures the fraction of PRs that link to issues out of all PRs from all contributors. The list of PRs is fetched using GitHub API for a project and regex is used to search for keywords like ‘issue \#123’ or ‘\#123’ in the title, comments, and/or git messages. Some projects refer to issues not hosted on GitHub. The reference, however, still follows the convention of starting with '\#'.
+**Metric 5:** Centralized management Index: measures the fraction of PRs that link to issues out of all PRs from all contributors. The list of PRs is fetched using GitHub API for a project and regex is used to search for keywords like ‘issue #123’ or ‘#123’ in the title, comments, and/or git messages. Some projects refer to issues not hosted on GitHub. The reference, however, still follows the convention of starting with '#'.
 
 *File: cntr_management.py*
 
