@@ -44,3 +44,5 @@ File: [src/metrics.py](src/metrics.py)
 **Frequency Index:** is a metric to take into account the rate of contributions made by developers to a project and the degree as to how difficult it is for the core team to incorporate the changes. It's measured as the average number of PRs raised to the main branch in a particular time interval. We decided on an initial time interval of 14 days for collecting this metric. Noticing a great variability in the data collected we then decided to check the number of PRs raised during a month. Since PyDriller does not have pull requests data we rely on GitHub APIs to collect them for a project. Using paginated pull APIs we get all the PRs and count the number of PRs raised during a period of 30 days. The index value is then just the average of the counts of all the PRs raised. 
 
 File: [src/metrics.py](src/metrics.py)
+
+The results of these metrics calculation can be found here: [results/metrics_combined - asfi_refined_with_metrics.csv](results/metrics_combined - asfi_refined_with_metrics.csv)
