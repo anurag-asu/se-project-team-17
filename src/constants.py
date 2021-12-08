@@ -2,4 +2,33 @@
 
 # FAILED_URLS = ['https://github.com/apache/incubator-Marvin-AI', 'https://github.com/apache/incubator-PageSpeed', 'https://github.com/apache/incubator-SDAP', 'https://github.com/apache/incubator-Taverna', 'https://github.com/apache/incubator-Warble', 'https://github.com/apache/Amber', 'https://github.com/apache/Apex', 'https://github.com/apache/Apollo', 'https://github.com/apache/Beehive', 'https://github.com/apache/CommonsRDF', 'https://github.com/apache/cTAKES', 'https://github.com/apache/DeviceMap', 'https://github.com/apache/Directory', 'https://github.com/apache/EasyAnt', 'https://github.com/apache/Flex', 'https://github.com/apache/Guacamole', 'https://github.com/apache/Hermes', 'https://github.com/apache/httpd-CLI', 'https://github.com/apache/iBATIS', 'https://github.com/apache/Ivy', 'https://github.com/apache/JaxMe', 'https://github.com/apache/JDO', 'https://github.com/apache/log4cxx2', 'https://github.com/apache/log4net', 'https://github.com/apache/Log4php', 'https://github.com/apache/MerlinDeveloper', 'https://github.com/apache/mod_ftp', 'https://github.com/apache/Muse', 'https://github.com/apache/Mynewt', 'https://github.com/apache/OGNL', 'https://github.com/apache/Olingo', 'https://github.com/apache/OpenOffice.org', 'https://github.com/apache/Parquet', 'https://github.com/apache/RAT', 'https://github.com/apache/River', 'https://github.com/apache/ServiceComb', 'https://github.com/apache/Tapestry', 'https://github.com/apache/Tobago', 'https://github.com/apache/Trinidad', 'https://github.com/apache/Tuscany', 'https://github.com/apache/UIMA', 'https://github.com/apache/Woden', 'https://github.com/apache/Agila', 'https://github.com/apache/Alois', 'https://github.com/apache/AltRMI', 'https://github.com/apache/AriaTosca', 'https://github.com/apache/AWF', 'https://github.com/apache/Axion', 'https://github.com/apache/Bluesky', 'https://github.com/apache/Blur', 'https://github.com/apache/Climate Model Diagnostic Analyzer', 'https://github.com/apache/Composer', 'https://github.com/apache/Concerted', 'https://github.com/apache/Corinthia', 'https://github.com/apache/Cotton', 'https://github.com/apache/Depot', 'https://github.com/apache/Droids', 'https://github.com/apache/Gearpump', 'https://github.com/apache/Gossip', 'https://github.com/apache/Graffito', 'https://github.com/apache/Heraldry', 'https://github.com/apache/HISE', 'https://github.com/apache/HORN', 'https://github.com/apache/Imperius', 'https://github.com/apache/iota', 'https://github.com/apache/JuiCE', 'https://github.com/apache/Kabuki', 'https://github.com/apache/Kato', 'https://github.com/apache/Kitty', 'https://github.com/apache/Lokahi', 'https://github.com/apache/Lucene4c', 'https://github.com/apache/MRQL', 'https://github.com/apache/NMaven', 'https://github.com/apache/Olio', 'https://github.com/apache/OpenAz', 'https://github.com/apache/Pirk', 'https://github.com/apache/Provisionr', 'https://github.com/apache/Quickstep', 'https://github.com/apache/RCF', 'https://github.com/apache/Ripple', 'https://github.com/apache/S4', 'https://github.com/apache/Slider', 'https://github.com/apache/SocialSite', 'https://github.com/apache/Stonehenge', 'https://github.com/apache/TripleSoup', 'https://github.com/apache/TSIK', 'https://github.com/apache/WADI', 'https://github.com/apache/Wave', 'https://github.com/apache/WSRP4J', 'https://github.com/apache/XAP', 'https://github.com/apache/XMLBeans/C++', 'https://github.com/apache/Yoko']
 
-FAILED_URLS_SET_1 = ['https://github.com/apache/JaxMe', 'https://github.com/apache/log4cxx2', 'https://github.com/apache/MerlinDeveloper', 'https://github.com/apache/Muse', 'https://github.com/apache/AltRMI', 'https://github.com/apache/Climate', 'https://github.com/apache/AWF', 'https://github.com/apache/Bluesky', 'https://github.com/apache/Depot', 'https://github.com/apache/Graffito', 'https://github.com/apache/Heraldry', 'https://github.com/apache/HISE', 'https://github.com/apache/Imperius', 'https://github.com/apache/JuiCE', 'https://github.com/apache/Kabuki', 'https://github.com/apache/Kato', 'https://github.com/apache/Kitty', 'https://github.com/apache/Lokahi', 'https://github.com/apache/Lucene4c', 'https://github.com/apache/Olio', 'https://github.com/apache/SocialSite', 'https://github.com/apache/RCF', 'https://github.com/apache/Stonehenge', 'https://github.com/apache/TSIK', 'https://github.com/apache/TripleSoup', 'https://github.com/apache/xmlbeans', 'https://github.com/apache/WADI', 'https://github.com/apache/WSRP4J']
+FAILED_URLS_SET_1 = [
+    "https://github.com/apache/JaxMe",
+    "https://github.com/apache/log4cxx2",
+    "https://github.com/apache/MerlinDeveloper",
+    "https://github.com/apache/Muse",
+    "https://github.com/apache/AltRMI",
+    "https://github.com/apache/Climate",
+    "https://github.com/apache/AWF",
+    "https://github.com/apache/Bluesky",
+    "https://github.com/apache/Depot",
+    "https://github.com/apache/Graffito",
+    "https://github.com/apache/Heraldry",
+    "https://github.com/apache/HISE",
+    "https://github.com/apache/Imperius",
+    "https://github.com/apache/JuiCE",
+    "https://github.com/apache/Kabuki",
+    "https://github.com/apache/Kato",
+    "https://github.com/apache/Kitty",
+    "https://github.com/apache/Lokahi",
+    "https://github.com/apache/Lucene4c",
+    "https://github.com/apache/Olio",
+    "https://github.com/apache/SocialSite",
+    "https://github.com/apache/RCF",
+    "https://github.com/apache/Stonehenge",
+    "https://github.com/apache/TSIK",
+    "https://github.com/apache/TripleSoup",
+    "https://github.com/apache/xmlbeans",
+    "https://github.com/apache/WADI",
+    "https://github.com/apache/WSRP4J",
+]

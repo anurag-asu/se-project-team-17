@@ -43,7 +43,7 @@ def get_project_list(path) -> List:
 
 def match_regex(s: str) -> bool:
     """check if the regex exists in the str"""
-    regex = " #[0-9]*" # its seen that a reference can be made to an issue which is hosted at places other than github
+    regex = " #[0-9]*"  # its seen that a reference can be made to an issue which is hosted at places other than github
     try:
         match = re.search(regex, s)
         return match
@@ -137,7 +137,6 @@ def run_cntrl_mng_idx_for_all(path):
         if not row["correct_url_found"]:
             # cntrl_mng_idx_list.append(None)
             print(Fore.RED + f"Running metric on mirrored url {row['pj_alias']}")
-            
 
         try:
 
