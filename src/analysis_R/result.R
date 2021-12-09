@@ -6,23 +6,21 @@ library(MASS)
 library(pROC)
 
 ## Box plot no outlier only status Graduated and Retired
-# 1. Frequency
-Q <- quantile(df_no_I_na$frequency, probs=c(.25, .75), na.rm = FALSE)
-iqr <- IQR(df_no_I_na$frequency)
+# 1. Logic-coupling index
+Q <- quantile(df_no_I_na$logic_coupling_index, probs=c(.25, .75), na.rm = FALSE)
+iqr <- IQR(df_no_I_na$logic_coupling_index)
 up <-  Q[2]+1.5*iqr  
 low <- Q[1]-1.5*iqr
-freq_df <- subset(df_no_I_na, df_no_I_na$frequency > (Q[1] - 1.5*iqr) & df_no_I_na$frequency < (Q[2]+1.5*iqr))
-boxplot(frequency ~ status, data = freq_df)
-summary(freq_df$frequency)
+log_df <- subset(df_no_I_na, df_no_I_na$logic_coupling_index > (Q[1] - 1.5*iqr) & df_no_I_na$logic_coupling_index < (Q[2]+1.5*iqr))
+boxplot(logic_coupling_index ~ status, data = log_df, main = "Logic coupling index")
 
-# 2. Dimensional
-Q <- quantile(df_no_I_na$dimensionality, probs=c(.25, .75), na.rm = FALSE)
-iqr <- IQR(df_no_I_na$dimensionality)
+# 2. Additive contribution index
+Q <- quantile(df_no_I_na$additive_contribution_index, probs=c(.25, .75), na.rm = FALSE)
+iqr <- IQR(df_no_I_na$additive_contribution_index)
 up <-  Q[2]+1.5*iqr  
 low <- Q[1]-1.5*iqr
-dem_df <- subset(df_no_I_na, df_no_I_na$dimensionality > (Q[1] - 1.5*iqr) & df_no_I_na$dimensionality < (Q[2]+1.5*iqr))
-boxplot(dimensionality ~ status, data = dem_df)
-summary(dem_df)
+add_df <- subset(df_no_I_na, df_no_I_na$additive_contribution_index > (Q[1] - 1.5*iqr) & df_no_I_na$additive_contribution_index < (Q[2]+1.5*iqr))
+boxplot(additive_contribution_index ~ status, data = add_df, main = "Additive contribution index")
 
 # 3. Ratio of duplicate PRs [Not working]
 Q <- quantile(df_no_I_na$ratio_of_duplicate_prs, probs=c(.25, .75), na.rm = FALSE)
@@ -31,8 +29,7 @@ up <-  Q[2]+1.5*iqr
 low <- Q[1]-1.5*iqr
 ratio_dup_df <- subset(df_no_I_na, df_no_I_na$ratio_of_duplicate_prs > (Q[1] - 1.5*iqr) & df_no_I_na$ratio_of_duplicate_prs < (Q[2]+1.5*iqr))
 ratio_dup_df$ratio_of_duplicate_prs
-boxplot(ratio_of_duplicate_prs ~ status, data = ratio_dup_df)
-df_no_na$ratio_of_duplicate_prs
+boxplot(ratio_of_duplicate_prs ~ status, data = ratio_dup_df, main = "Ratio of duplicate PRs")
 
 # 4. Central Management
 Q <- quantile(df_no_I_na$cntr_management, probs=c(.25, .75), na.rm = FALSE)
@@ -40,35 +37,51 @@ iqr <- IQR(df_no_I_na$cntr_management)
 up <-  Q[2]+1.5*iqr  
 low <- Q[1]-1.5*iqr
 cntr_df <- subset(df_no_I_na, df_no_I_na$cntr_management > (Q[1] - 1.5*iqr) & df_no_I_na$cntr_management < (Q[2]+1.5*iqr))
-boxplot(cntr_management ~ status, data = cntr_df)
+boxplot(cntr_management ~ status, data = cntr_df, main = "Central management index")
 
-# 5. Additive contribution index
-Q <- quantile(df_no_I_na$additive_contribution_index, probs=c(.25, .75), na.rm = FALSE)
-iqr <- IQR(df_no_I_na$additive_contribution_index)
+# 5. Pre-communication index
+Q <- quantile(df_no_I_na$pre_communication, probs=c(.25, .75), na.rm = FALSE)
+iqr <- IQR(df_no_I_na$pre_communication)
 up <-  Q[2]+1.5*iqr  
 low <- Q[1]-1.5*iqr
-add_df <- subset(df_no_I_na, df_no_I_na$additive_contribution_index > (Q[1] - 1.5*iqr) & df_no_I_na$additive_contribution_index < (Q[2]+1.5*iqr))
-boxplot(additive_contribution_index ~ status, data = add_df)
+pre_df <- subset(df_no_I_na, df_no_I_na$pre_communication > (Q[1] - 1.5*iqr) & df_no_I_na$pre_communication < (Q[2]+1.5*iqr))
+boxplot(pre_communication ~ status, data = pre_df, main = "Pre-communication index")
+head(pre_df)
 
-# 6. Logic-coupling index
-Q <- quantile(df_no_I_na$logic_coupling_index, probs=c(.25, .75), na.rm = FALSE)
-iqr <- IQR(df_no_I_na$logic_coupling_index)
+# 6. Dimensional
+Q <- quantile(df_no_I_na$dimensionality, probs=c(.25, .75), na.rm = FALSE)
+iqr <- IQR(df_no_I_na$dimensionality)
 up <-  Q[2]+1.5*iqr  
 low <- Q[1]-1.5*iqr
-log_df <- subset(df_no_I_na, df_no_I_na$logic_coupling_index > (Q[1] - 1.5*iqr) & df_no_I_na$logic_coupling_index < (Q[2]+1.5*iqr))
-boxplot(logic_coupling_index ~ status, data = log_df)
+dem_df <- subset(df_no_I_na, df_no_I_na$dimensionality > (Q[1] - 1.5*iqr) & df_no_I_na$dimensionality < (Q[2]+1.5*iqr))
+boxplot(dimensionality ~ status, data = dem_df, main="Dimensionality of commits")
+summary(dem_df)
+
+# 7. Frequency
+Q <- quantile(df_no_I_na$frequency, probs=c(.25, .75), na.rm = FALSE)
+iqr <- IQR(df_no_I_na$frequency)
+up <-  Q[2]+1.5*iqr  
+low <- Q[1]-1.5*iqr
+freq_df <- subset(df_no_I_na, df_no_I_na$frequency > (Q[1] - 1.5*iqr) & df_no_I_na$frequency < (Q[2]+1.5*iqr))
+boxplot(frequency ~ status, data = freq_df, main="Frequency of PRs")
+summary(freq_df$frequency)
+
+
+
+
+
+
 
 ## Histogram ##
-hist(freq_df[,8][freq_df$status=='G' | freq_df$status=='R'], main = colnames(freq_df)[8],xlab = colnames(freq_df)[8], col = 'blue')
-hist(dem_df[,9][df$status=='G' | df$status=='R'], main = colnames(dem_df)[9],xlab = colnames(dem_df)[9], col = 'blue')
-hist(ratio_dup_df[,10][df$status=='G' | df$status=='R'], main = colnames(ratio_dup_df)[10],xlab = colnames(ratio_dup_df)[10], col = 'blue')
-hist(cntr_df[,13][df$status=='G' | df$status=='R'], main = colnames(cntr_df)[13],xlab = colnames(cntr_df)[13], col = 'blue')
-hist(add_df[,14][df$status=='G' | df$status=='R'], main = colnames(add_df)[14],xlab = colnames(add_df)[14], col = 'blue')
-hist(log_df[,15][df$status=='G' | df$status=='R'], main = colnames(log_df)[15],xlab = colnames(log_df)[15], col = 'blue')
-
-## Normalization ##
-
-
+hist(freq_df[,8][freq_df$status=='G' | freq_df$status=='R'], main = colnames(freq_df)[8],xlab = colnames(freq_df)[8],col = 'blue',sub = "[i]" ,cex.main = 2)
+hist(dem_df[,9][df$status=='G' | df$status=='R'], main = colnames(dem_df)[9],xlab = colnames(dem_df)[9], col = 'blue', sub = "[ii]", cex.main = 2)
+hist(ratio_dup_df[,10][df$status=='G' | df$status=='R'], main = colnames(ratio_dup_df)[10],xlab = colnames(ratio_dup_df)[10], col = 'blue', sub = "[iii]", cex.main = 2)
+hist(cntr_df[,13][df$status=='G' | df$status=='R'], main = colnames(cntr_df)[13],xlab = colnames(cntr_df)[13], col = 'blue', sub = "[iv]", cex.main = 2)
+hist(add_df[,14][df$status=='G' | df$status=='R'], main = colnames(add_df)[14],xlab = colnames(add_df)[14], col = 'blue', sub = "[v]" , cex.main = 2)
+hist(log_df[,15][df$status=='G' | df$status=='R'], main = colnames(log_df)[15],xlab = colnames(log_df)[15], col = 'blue', sub = "[vi]", cex.main = 2)
+hist(pre_df[,19][df$status=='G' | df$status=='R'], main = colnames(pre_df)[19],xlab = colnames(pre_df)[19], col = 'blue', sub = "[vii]" ,cex.main = 2)
+hist(df_no_I_na[,16], main = colnames(df_no_I_na)[16],xlab = colnames(df_no_I_na)[16], col = 'blue', sub = "[viii]" ,cex.main = 2)
+barplot(table(df_no_I_na$has_hard_fork[df_no_I_na.falls.in.range == TRUE]))
 ## Logistic Regression ##
 xtabs(~status + frequency, data = freq_df)
 xtabs(~status + has_hard_fork, data = df_no_I_na)
@@ -106,7 +119,18 @@ ll.proposed <- logistic_cm$deviance/-2
 1 - pchisq((logistic_cm$null.deviance - logistic_cm$deviance), df=1)
 
 ####-------------------------------------------------------------------------------------------
-# 6. Additive contribution index
+# 6. Pre-communication
+logistic_pc <- glm(status ~ pre_communication, data=df_no_I_na, family="binomial")
+summary(logistic_pc)
+
+#"Pseudo R-squared" and its p-value
+ll.null <- logistic_pc$null.deviance/-2
+ll.proposed <- logistic_pc$deviance/-2
+
+## McFadden's Pseudo R^2 = [ LL(Null) - LL(Proposed) ] / LL(Null)
+(ll.null - ll.proposed) / ll.null
+####-------------------------------------------------------------------------------------------
+# 7. Additive contribution index
 logistic_ac <- glm(status ~ additive_contribution_index, data=add_df, family="binomial")
 summary(logistic_ac)
 
@@ -123,7 +147,7 @@ ll.proposed <- logistic_ac$deviance/-2
 
 ####-------------------------------------------------------------------------------------------
 
-# 7. Logic-coupling index
+# 8. Logic-coupling index
 logistic_lc <- glm(status ~ logic_coupling_index, data=log_df, family="binomial")
 summary(logistic_lc)
 
